@@ -4,9 +4,7 @@ import SocialMedia from "./Shared/Social Media login/socialMedia";
 import SignInHome from "./SignIn/home";
 import SignUpHome from "./SignUp/SignUpHome";
 
-const Home = () => {
-  const [signIn, setSignIn] = useState(true);
-
+const Home = ({ signIn, setSignIn }) => {
   return (
     <div className="flex justify-center ">
       <div id="login page" className="w-[400px] mt-[25px]">

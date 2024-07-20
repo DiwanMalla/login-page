@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { FaEnvelope, FaLock, FaUser } from "react-icons/fa";
-
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+
 const Form = () => {
+  const navigate = useNavigate();
   const [signUpInfo, setSignUpInfo] = useState({
     name: "",
     email: "",
@@ -18,14 +20,19 @@ const Form = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "https://localhost:8000/auth/signup";
+      const url = "http://localhost:8000/auth/signup";
       const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(signUpInfo),
       });
       const result = await response.json();
-      console.log(result);
+      const { success } = result;
+      if (success) {
+        setTimeout(() => {
+          navigate("/signin");
+        }, 1000);
+      }
     } catch (err) {
       console.log(`Error to signup ${err}`);
     }
